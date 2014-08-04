@@ -1,7 +1,9 @@
 # Shaman
 
-TODO: Write a gem description
+Make a MD5 Sha from a string.
 
+If the string is a valid JSON string the parse it, sort it, and then create a
+MD5.
 ## Installation
 
 Add this line to your application's Gemfile:
@@ -18,7 +20,11 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+```ruby
+    Shaman.new("some string").sha
+
+    #=> "5ac749fbeec93607fc28d666be85e73a"
+```
 
 ## Contributing
 
