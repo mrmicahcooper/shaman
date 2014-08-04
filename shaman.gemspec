@@ -6,11 +6,11 @@ require 'shaman/version'
 Gem::Specification.new do |spec|
   spec.name          = "shaman"
   spec.version       = Shaman::VERSION
-  spec.authors       = ["Hashrocket Workstation"]
-  spec.email         = ["dev@hashrocket.com"]
-  spec.summary       = %q{TODO: Write a short summary. Required.}
-  spec.description   = %q{TODO: Write a longer description. Optional.}
-  spec.homepage      = ""
+  spec.authors       = ["Micah Cooper"]
+  spec.email         = ["micah@mrmicahcooper.com"]
+  spec.summary       = %q{Mack a Sha man.}
+  spec.description   = %q{Convert a string into a MD5. If the string is Valid JSON, parse it, sort the keys, and then turn it into a MD5.}
+  spec.homepage      = "http://github.com/mrmicahcooper/shaman"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files -z`.split("\x0")
@@ -18,6 +18,9 @@ Gem::Specification.new do |spec|
   spec.test_files    = spec.files.grep(%r{^(test|spec|features)/})
   spec.require_paths = ["lib"]
 
+  spec.add_dependency "oj"
+
   spec.add_development_dependency "bundler", "~> 1.6"
   spec.add_development_dependency "rake"
+  spec.add_development_dependency "rspec"
 end
