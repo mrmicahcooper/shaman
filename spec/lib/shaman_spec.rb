@@ -1,3 +1,4 @@
+require 'oj'
 require 'shaman'
 
 describe Shaman do
@@ -35,6 +36,24 @@ describe Shaman do
       let(:body) { %q[{foo] }
       it "creates a sha of the body" do
         expect(subject).to eq('594b979db0ddeee4bed8d10e9a2d21b1')
+      end
+
+      context "with nested valid JSON" do
+        let(:body) do
+          foo = {
+            z: {yar: "dar"},
+            a: {c: "baz"},
+            b: {
+              d: "mother",
+              a: "father"
+            }
+          }
+          Oj.dump(foo)
+        end
+
+        it "creates a sha of the parsed sorted json" do
+        expect(subject).to eq("27bd24ec44f579a3a9d843121b9daaa8")
+        end
       end
     end
 
