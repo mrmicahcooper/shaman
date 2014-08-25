@@ -39,8 +39,6 @@ class Shaman
     body
   end
 
-  private
-
   def prepped_body
     return body        if valid_hash?
     return parsed_json if valid_json?
