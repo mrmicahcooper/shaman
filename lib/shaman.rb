@@ -7,11 +7,11 @@ class Shaman
   attr_reader :body
 
   def initialize(body)
-    @body = body.to_s
+    @body = body
   end
 
   def sha
-    Digest::MD5.hexdigest(prepped_body.to_s)
+    Digest::MD5.hexdigest(sorted_hash(prepped_body).to_s)
   end
 
   def valid_json?
@@ -36,8 +36,9 @@ class Shaman
   end
 
   def prepped_body
-    sort_body = parsed_json or parsed_xml or body
-    sorted_hash(sort_body)
+    return parsed_json if valid_json?
+    return parsed_xml  if valid_xml?
+    body
   end
 
   def sorted_hash(obj)
