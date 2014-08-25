@@ -23,6 +23,10 @@ class Shaman
     parsed_xml.class == Hash
   end
 
+  def valid_hash?
+    body.class == Hash
+  end
+
   def parsed_json
     @parsed_json ||= Oj.load(body)
   rescue Oj::ParseError
@@ -38,6 +42,7 @@ class Shaman
   private
 
   def prepped_body
+    return body        if valid_hash?
     return parsed_json if valid_json?
     return parsed_xml  if valid_xml?
     body
