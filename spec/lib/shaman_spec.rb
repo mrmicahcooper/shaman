@@ -60,7 +60,7 @@ describe Shaman do
       end
 
       it "creates a sha of the parsed sorted json" do
-        expect(subject).to eq("27bd24ec44f579a3a9d843121b9daaa8")
+        expect(subject).to eq("f246fa6a718144a0ec677a1db58fac52")
       end
     end
   end

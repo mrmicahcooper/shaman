@@ -35,6 +35,8 @@ class Shaman
     body
   end
 
+  private
+
   def prepped_body
     return parsed_json if valid_json?
     return parsed_xml  if valid_xml?
@@ -46,7 +48,7 @@ class Shaman
     hash = Hash.new
     obj.each { |k, v| hash[k] = sorted_hash(v) }
     sorted = hash.sort { |a, b| a[0].to_s <=> b[0].to_s }
-    Hash[sorted]
+    Hash[sorted].stringify_keys
   end
 
 end
