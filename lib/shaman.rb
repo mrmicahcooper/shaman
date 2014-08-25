@@ -1,6 +1,7 @@
-require 'digest'
 require 'shaman/version'
+require 'digest'
 require 'oj'
+require 'active_support/core_ext/hash/conversions'
 
 class Shaman
   attr_reader :body
@@ -13,24 +14,30 @@ class Shaman
     Digest::MD5.hexdigest(prepped_body.to_s)
   end
 
-  def valid_json_body?
-    parsed_body.class == Hash
+  def valid_json?
+    parsed_json.class == Hash
+  end
+  alias valid_json_body? valid_json?
+
+  def valid_xml?
+    parsed_xml.class == Hash
   end
 
-  private
-
-  def prepped_body
-    if valid_json_body?
-      sorted_hash(parsed_body)
-    else
-      parsed_body
-    end
-  end
-
-  def parsed_body
-    @parsed_body ||= Oj.load(body)
+  def parsed_json
+    @parsed_json ||= Oj.load(body)
   rescue Oj::ParseError
     body
+  end
+
+  def parsed_xml
+    @parsed_xml ||= Hash.from_xml(body)
+  rescue REXML::ParseException
+    body
+  end
+
+  def prepped_body
+    sort_body = parsed_json or parsed_xml or body
+    sorted_hash(sort_body)
   end
 
   def sorted_hash(obj)
