@@ -1,6 +1,7 @@
 require 'shaman/version'
 require 'digest'
 require 'oj'
+require 'rack'
 require 'active_support/core_ext/hash/conversions'
 
 class Shaman
