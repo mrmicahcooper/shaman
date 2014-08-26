@@ -28,14 +28,19 @@ class Shaman
     body.class == Hash
   end
 
+  def body_hash
+    return body if valid_hash?
+    false
+  end
+
   def parsed_json
-    @parsed_json ||= Oj.load(body)
+    Oj.load(body)
   rescue Oj::ParseError
     false
   end
 
   def parsed_xml
-    @parsed_xml ||= Hash.from_xml(body)
+    Hash.from_xml(body)
   rescue REXML::ParseException
     false
   end
@@ -45,7 +50,7 @@ class Shaman
   end
 
   def prepped_body
-    parsed_json or parsed_xml or parsed_form
+    body_hash or parsed_json or parsed_xml or parsed_form
   end
 
   def sorted_hash(obj)

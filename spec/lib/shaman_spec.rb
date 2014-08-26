@@ -33,6 +33,14 @@ describe Shaman do
       described_class.new(body).sha
     end
 
+    context "when body is a hash" do
+      let(:body) { {"foo"=> "bar"} }
+      it "creates a sha of the parsed JSON" do
+        expect(subject).to eq('f59494512dabbab0cd0a421c43834271')
+      end
+
+    end
+
     context "when request is valid JSON" do
       let(:body) { %q[{"foo":"bar"}] }
       it "creates a sha of the parsed JSON" do
