@@ -31,20 +31,21 @@ class Shaman
   def parsed_json
     @parsed_json ||= Oj.load(body)
   rescue Oj::ParseError
-    body
+    false
   end
 
   def parsed_xml
     @parsed_xml ||= Hash.from_xml(body)
   rescue REXML::ParseException
-    body
+    false
+  end
+
+  def parsed_form
+    Rack::Utils.parse_nested_query(body)
   end
 
   def prepped_body
-    return body        if valid_hash?
-    return parsed_json if valid_json?
-    return parsed_xml  if valid_xml?
-    body
+    parsed_json or parsed_xml or parsed_form
   end
 
   def sorted_hash(obj)

@@ -1,4 +1,3 @@
-require 'oj'
 require 'shaman'
 
 describe Shaman do
@@ -42,8 +41,8 @@ describe Shaman do
     end
     context "when request is not valid JSON"
     let(:body) { %q[{foo] }
-    it "creates a sha of the body" do
-      expect(subject).to eq('594b979db0ddeee4bed8d10e9a2d21b1')
+    it "creates a sha of the form encoded parsed body" do
+      expect(subject).to eq('c22147b34317edaa3ab976ae1bff8712')
     end
 
     context "with nested valid JSON" do
