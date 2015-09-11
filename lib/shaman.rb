@@ -34,7 +34,7 @@ class Shaman
   end
 
   def parsed_json
-    Oj.load(body)
+    Oj.load(body) if body
   rescue Oj::ParseError
     false
   end

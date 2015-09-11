@@ -26,6 +26,12 @@ describe Shaman do
       expect(subject.valid_json?).to be false
     end
   end
+  context "when body is nil" do
+    let(:body) { nil }
+    it "returns false" do
+      expect(subject.valid_json?).to be false
+    end
+  end
 
   describe "#sha" do
 
